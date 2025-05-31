@@ -45,12 +45,28 @@ def print_file_info(files_dict):
     print('Files found:')
     for path, size in files_dict.items():
         print(f"{path}: {size} MB")
-    print(f'Total setup files size is ≈ {sum(files_dict.values())} MB')
-    confirm = input('Do you really want to delete all the listed files above? (y/n): ').strip().lower()
+    print(f'Total setup files size is ≈ {round(sum(files_dict.values()),2)} MB')
+    confirm = input("To delete all the files listed above type 'y', to select which ones to delete type 's', to cancel deletion type 'n': ").strip().lower()
     if confirm == 'y':
         clean(files_dict)
+    elif confirm == 's':
+        new_dict = select_files_to_delete(files_dict)
+        clean(new_dict)
+    elif confirm == 'n':
+        print('Deletion canceled')
     else:
-        print('Deletion canceled.')
+        print("Invalid input. Please enter 'y' (yes), 's' (select), or 'n' (no).")
+
+def select_files_to_delete(files_dict):
+    new_dict = {}
+    for path,size in files_dict.items():
+        confirm = input(f'Do you really want to delete {path} (y/n): ').strip().lower()
+        if confirm == 'y':
+            new_dict[path] = files_dict[path]
+            print(f'Selected {path}')
+        else:
+            print(f'Skipped {path}')
+    return new_dict
 
 if __name__ == "__main__":
     files_dict = generate_files_dict(dir_path)
