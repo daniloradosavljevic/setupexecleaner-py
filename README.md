@@ -28,13 +28,13 @@ This tool is ideal for cleaning up download folders or disk clutter caused by le
 From your terminal or command prompt:
 
 ```bash
-python cleaner.py /path/to/your/target/directory
+python clean.py /path/to/your/target/directory
 ```
 
 #### Example on Windows:
 
 ```bash
-python cleaner.py "C:\Users\YourName\Downloads"
+python clean.py "C:\Users\YourName\Downloads"
 ```
 
 ---
